@@ -1,0 +1,78 @@
+1) Veri tabanınız içerisinde doctor adında bir tablo oluşturun.
+	Tabloda(id: bigint, name: character varying, surname: character varying, proficiency: character varying) kolonları olmalıdır.
+    id kolonu PRİMARY KEY ve auto-increment olmalıdır.
+
+CREATE TABLE public.doctor(
+	id BIGSERIAL PRIMARY KEY,
+	name varchar,
+	surname varchar,
+	proficiency varchar
+);
+
+------------------------------------------------------------------------------------------------------------------------------------------
+
+
+2) Veri tabanınız içerisinde nurse adında bir tablo oluşturun.
+	Tabloda(id: bigint, name: character varying, surname: character varying, proficiency: character varying) kolonları olmalıdır.
+    id kolonu PRİMARY KEY ve auto-increment olmalıdır.
+
+CREATE TABLE public.nurse(
+	id BIGSERIAL PRIMARY KEY,
+	name varchar,
+	surname varchar,
+	proficiency varchar
+);
+
+------------------------------------------------------------------------------------------------------------------------------------------
+
+
+3) Veri tabanınız içerisinde patient adında bir tablo oluşturun.
+	Tabloda(id: bigint, name: character varying, surname: character varying, email: character varying, complaint: text) kolonları olmalıdır.
+    id kolonu PRİMARY KEY ve auto-increment olmalıdır.
+
+CREATE TABLE public.patient(
+	id BIGSERIAL PRIMARY KEY,
+	name varchar,
+	surname varchar,
+	email varchar,
+	complaint text
+);
+
+
+------------------------------------------------------------------------------------------------------------------------------------------
+
+
+4) Veri tabanınız içerisinde surgery adında bir tablo oluşturun.
+    Tabloda(id: bigint, nurse_id: bigint, patient_id: bigint, doctor_id: bigint) kolonları olmalıdır.
+    id kolonu PRİMARY KEY ve auto-increment olmalıdır.
+	Bu tabloda nurse_id, patient_id ve doctor_id foreign key olmalıdır.
+
+
+CREATE TABLE public.surgery(
+	id BIGSERIAL PRIMARY KEY,
+	nurse_id BIGINT,
+	patient_id BIGINT,
+	doctor_id BIGINT,
+	FOREIGN KEY (nurse_id) REFERENCES public.nurse(id),
+	FOREIGN KEY (patient_id) REFERENCES public.patient(id),
+	FOREIGN KEY (doctor_id) REFERENCES public.doctor(id)
+);
+
+
+------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+5) Veri tabanınız içerisinde operation adında bir tablo oluşturun.
+     Tabloda(id: bigint, patient_id: bigint, doctor_id: bigint) kolonları olmalıdır.
+     id kolonu PRİMARY KEY ve auto-increment olmalıdır.
+     Bu tabloda patient_id ve doctor_id foreign key olmalıdır.
+
+
+CREATE TABLE public.operation(
+	id BIGSERIAL PRIMARY KEY,
+	patient_id BIGINT,
+	doctor_id BIGINT,
+	FOREIGN KEY (patient_id) REFERENCES public.patient(id),
+	FOREIGN KEY (doctor_id) REFERENCES public.doctor(id)
+);
